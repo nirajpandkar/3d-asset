@@ -1,0 +1,117 @@
+ * Serving Flask app "main" (lazy loading)
+ * Environment: production
+   WARNING: This is a development server. Do not use it in a production deployment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 746-628-418
+182.70.37.155 - - [28/Nov/2020 14:35:20] "[37mGET /image HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:01:38] "[37mGET /image HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:02:40] "[37mGET /image HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:02:41] "[37mGET /static/js/model3d.js HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:02:42] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+182.70.37.155 - - [28/Nov/2020 15:03:55] "[35m[1mPOST /image HTTP/1.1[0m" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/Archit/3d-asset-generator/main.py", line 53, in get_image
+    
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/werkzeug/datastructures.py", line 3066, in save
+    dst = open(dst, "wb")
+FileNotFoundError: [Errno 2] No such file or directory: 'static/uploaded_videos/99297ee7.mp4'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 2464, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 2450, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 1867, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 2447, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 1952, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 1821, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/_compat.py", line 39, in reraise
+    raise value
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 1950, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/app.py", line 1936, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/Archit/3d-asset-generator/main.py", line 67, in get_image
+    
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/helpers.py", line 423, in flash
+    session["_flashes"] = flashes
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/werkzeug/local.py", line 350, in __setitem__
+    self._get_current_object()[key] = value
+  File "/home/ubuntu/anaconda3/envs/py3-theano-2/lib/python3.6/site-packages/flask/sessions.py", line 103, in _fail
+    "The session is unavailable because no secret "
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+182.70.37.155 - - [28/Nov/2020 15:03:56] "[37mGET /image?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:03:56] "[37mGET /image?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:03:56] "[37mGET /image?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:03:58] "[37mGET /image?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:03:58] "[37mGET /image?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:03:59] "[37mGET /image?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:07:01] "[37mGET /image HTTP/1.1[0m" 200 -
+ffmpeg version 3.4.8-0ubuntu0.2 Copyright (c) 2000-2020 the FFmpeg developers
+  built with gcc 7 (Ubuntu 7.5.0-3ubuntu1~18.04)
+  configuration: --prefix=/usr --extra-version=0ubuntu0.2 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --enable-gpl --disable-stripping --enable-avresample --enable-avisynth --enable-gnutls --enable-ladspa --enable-libass --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-libpulse --enable-librubberband --enable-librsvg --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libssh --enable-libtheora --enable-libtwolame --enable-libvorbis --enable-libvpx --enable-libwavpack --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzmq --enable-libzvbi --enable-omx --enable-openal --enable-opengl --enable-sdl2 --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-libopencv --enable-libx264 --enable-shared
+  libavutil      55. 78.100 / 55. 78.100
+  libavcodec     57.107.100 / 57.107.100
+  libavformat    57. 83.100 / 57. 83.100
+  libavdevice    57. 10.100 / 57. 10.100
+  libavfilter     6.107.100 /  6.107.100
+  libavresample   3.  7.  0 /  3.  7.  0
+  libswscale      4.  8.100 /  4.  8.100
+  libswresample   2.  9.100 /  2.  9.100
+  libpostproc    54.  7.100 / 54.  7.100
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'static/uploaded_videos/1af50077.mp4':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2020-11-28T15:07:16.000000Z
+    com.android.version: 10
+    com.android.capture.fps: 30.000000
+  Duration: 00:00:05.68, start: 0.000000, bitrate: 20587 kb/s
+    Stream #0:0(eng): Video: h264 (High) (avc1 / 0x31637661), yuvj420p(pc, bt470bg/bt470bg/smpte170m), 1920x1080, 19578 kb/s, SAR 1:1 DAR 16:9, 29.42 fps, 30 tbr, 90k tbn, 180k tbc (default)
+    Metadata:
+      rotate          : 90
+      creation_time   : 2020-11-28T15:07:16.000000Z
+      handler_name    : VideoHandle
+    Side data:
+      displaymatrix: rotation of -90.00 degrees
+    Stream #0:1(eng): Audio: aac (LC) (mp4a / 0x6134706D), 48000 Hz, stereo, fltp, 96 kb/s (default)
+    Metadata:
+      creation_time   : 2020-11-28T15:07:16.000000Z
+      handler_name    : SoundHandle
+Stream mapping:
+  Stream #0:0 -> #0:0 (h264 (native) -> png (native))
+Press [q] to stop, [?] for help
+[swscaler @ 0x55b74a1ba320] deprecated pixel format used, make sure you did set range correctly
+Output #0, image2, to 'static/processed_images/1af50077/%01d.png':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    com.android.capture.fps: 30.000000
+    com.android.version: 10
+    encoder         : Lavf57.83.100
+    Stream #0:0(eng): Video: png, rgb24, 1080x1920 [SAR 1:1 DAR 9:16], q=2-31, 200 kb/s, 0.50 fps, 0.50 tbn, 0.50 tbc (default)
+    Metadata:
+      encoder         : Lavc57.107.100 png
+      creation_time   : 2020-11-28T15:07:16.000000Z
+      handler_name    : VideoHandle
+    Side data:
+      displaymatrix: rotation of -0.00 degrees
+frame=    3 fps=0.0 q=-0.0 size=N/A time=00:00:02.00 bitrate=N/A dup=0 drop=83 speed=3.97x    frame=    4 fps=0.0 q=-0.0 Lsize=N/A time=00:00:08.00 bitrate=N/A dup=0 drop=161 speed=8.95x    
+video:9609kB audio:0kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: unknown
+182.70.37.155 - - [28/Nov/2020 15:07:49] "[37mPOST /image HTTP/1.1[0m" 200 -
+182.70.37.155 - - [28/Nov/2020 15:07:49] "[37mGET /static/uploaded_videos/1af50077.mp4 HTTP/1.1[0m" 206 -
+182.70.37.155 - - [28/Nov/2020 15:07:50] "[37mGET /static/uploaded_videos/1af50077.mp4 HTTP/1.1[0m" 206 -

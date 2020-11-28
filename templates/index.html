@@ -1,0 +1,122 @@
+<html> 
+    <head> 
+        <title>3D Asset Creation</title> 			
+        <!-- <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> -->
+        <script src="static/js/model3d.js"></script>
+        <!-- <link rel='stylesheet' type='text/css' href='static/css/my.css'> -->
+        <!-- <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link>  -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css">
+        <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.js"></script>
+        <style>
+            body{
+                background-color: whitesmoke;
+            }
+        </style>
+    </head> 
+    <body> 
+        <div class='ui padded centered grid'>
+            <!-- Messaging system -->
+            <div class="row">
+                <div class="center aligned column">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div style="height:10%; display:flex; align-items: center; justify-content: center">
+                                {% for category, message in messages %}
+                                    {% if category == error%}
+                                        <h3 style="color:red">{{ message }}</h3>
+                                    {% else %}
+                                        <h3 style="color:green">{{ message }}</h3>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+
+             <!-- Heading of the page -->
+            <div class="row">
+                <div class='center aligned column'>
+                    <h1>Create 3D assets!</h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class='center aligned column'>
+                    <form id='formsubmit' method="post" action="image" enctype = "multipart/form-data">
+            
+                        <div class="ui buttons">
+                            <!-- <div id='uploadimage' class="ui button" style="align-items: center;">
+                                <i class="image icon"></i>
+                                Image
+                            </div> -->
+                            <!-- <div class="or"></div> -->
+                            <div id='uploadvideo' class="ui button" style="align-items: center;">
+                                <i class="video icon"></i>
+                                Video
+                                <span style="font-size: 10px;">(Max 30MB)</span>
+                            </div>
+                        </div>
+                
+                        <!-- <input type='file' id='hiddeninputfile' accept="image/*" name = 'image' style="display: none"/> -->
+                        <input type="file" id="hiddeninputvideo" accept="video/*" name = 'video' style="display: none">
+                        <!-- <input id='submitbutton' class='ui button' type='submit'/> -->
+                    </form>
+                </div>
+            </div>
+    
+            <div class="row">
+                <div class="column">
+                    <!-- Nested grid -->
+                    <div class="ui centered grid">
+                        <div class="row">
+                            <div class="center aligned column">
+                                {%if original_video_path%}
+                                    <video id="player" width="320" height="240" controls>
+                                        <source type="video/mp4" src="{{original_video_path}}">
+                                    </video>
+                                {%endif%}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- <model-3d src="static/car_scaled.obj"></model-3d> -->
+    </body> 
+
+    <!-- <x3d width='600px' height='400px'> 
+        <scene> 
+        <shape> 
+            <appearance> 
+                <material diffuseColor='1 0 0'></material> 
+            </appearance> 			
+            <box></box> 
+        </shape> 
+        </scene> 
+    </x3d> 
+
+    <x3d width='500px' height='400px'> 
+        <scene>
+            <inline url="static/prediction100.x3d"> </inline> 
+        </scene> 
+    </x3d>  -->
+    <script>
+        $("#uploadvideo").on("click", function() {
+            $('#hiddeninputvideo').click(); 
+        });
+        document.getElementById("hiddeninputvideo").onchange = function() {
+            // $('#loader').removeClass('disabled').addClass('active');
+            document.getElementById("formsubmit").submit();
+        };
+    </script>
+</html>

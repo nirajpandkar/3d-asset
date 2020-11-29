@@ -6,6 +6,10 @@ import cv2
 import subprocess
 import sys
 import traceback
+import logging
+
+LOG_FILENAME='asset.log'
+logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
 from PIL import Image
 from flask import Flask, render_template, request, flash
@@ -67,7 +71,7 @@ def get_image():
                 unique_folder = os.path.join(app.config['PROCESSED_IMAGES'], uid)
                 os.system("mkdir -p " + unique_folder)
 
-                num_of_frames = 4
+                num_of_frames = 3
                 os.system("ffmpeg -i {} -r {} -start_number 0 {}/%01d.png".format(original_video_path, num_of_frames/video_duration, unique_folder))
                 print("Done extracting frames")
 
@@ -89,6 +93,7 @@ def get_image():
                 return render_template('index.html', original_video_path=original_video_path, obj_path=obj_path)
         except:
             flash("Our server hiccuped :/ Please upload another file! :)")
+            logging.error(traceback.format_exc())
             print(traceback.format_exc())
             return render_template('index.html')
     else:

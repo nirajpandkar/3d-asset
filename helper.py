@@ -43,4 +43,4 @@ def inference(dir_path):
 	# resize and remove background for all images
 	for image in imagelist:
 		resize_image(dir_path, image, square=True, remove_bg=True)
-		time.sleep(0.1)
+		time.sleep(0.5)

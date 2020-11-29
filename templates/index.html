@@ -1,10 +1,8 @@
 <html> 
     <head> 
         <title>3D Asset Creation</title> 			
-        <!-- <script type='text/javascript' src='http://www.x3dom.org/download/x3dom.js'> </script> -->
-        <script src="static/js/model3d.js"></script>
+        <!-- <script src="static/js/model3d.js"></script> -->
         <!-- <link rel='stylesheet' type='text/css' href='static/css/my.css'> -->
-        <!-- <link rel='stylesheet' type='text/css' href='http://www.x3dom.org/download/x3dom.css'></link>  -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.3.3/dist/semantic.min.css">
@@ -88,6 +86,14 @@
                     </div>
                 </div>
             </div>
+            
+            {%if obj_path %}
+            <div class="row">
+                <div class="column">
+                    <canvas id="scene"></canvas>
+                </div>
+            </div>
+            {%endif%}
         </div>
 
         
@@ -110,6 +116,87 @@
             <inline url="static/prediction100.x3d"> </inline> 
         </scene> 
     </x3d>  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+    <!-- <script src="three-obj-loader.js"></script> -->
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/127738/OBJLoader.js"></script>
+    <script>
+        //This demo is using the plugin "OBJLoader". Don't forget to include it into your page ;)
+        //You can find it here : https://github.com/mrdoob/three.js/tree/cf584a60bdfd24c42eaa81d484533364742bda44/examples/js/loaders
+
+        var renderer, scene, camera, banana;
+
+        var ww = window.innerWidth,
+            wh = window.innerHeight;
+
+        function init(){
+
+            renderer = new THREE.WebGLRenderer({canvas : document.getElementById('scene')});
+            renderer.setSize(ww,wh);
+
+            scene = new THREE.Scene();
+
+            camera = new THREE.PerspectiveCamera(50,ww/wh, 0.1, 10000 );
+            camera.position.set(0,0,500);
+            scene.add(camera);
+
+            //Add a light in the scene
+            directionalLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
+            directionalLight.position.set( 0, 0, 350 );
+            directionalLight.lookAt(new THREE.Vector3(0,0,0));
+            scene.add( directionalLight );
+
+            //Load the obj file
+            loadOBJ();
+        }
+
+        var loadOBJ = function(){
+
+            //Manager from ThreeJs to track a loader and its status
+            var manager = new THREE.LoadingManager();
+            //Loader for Obj from Three.js
+            var loader = new THREE.OBJLoader( manager );
+        
+            //Launch loading of the obj file, addBananaInScene is the callback when it's ready 
+            loader.load( '{{ obj_path }}', addBananaInScene);
+
+        };
+
+        var addBananaInScene = function(object){
+            banana = object;
+            //Move the banana in the scene
+            // banana.rotation.y = 0;
+            banana.position.x = 0;
+            banana.position.y = 0;
+            banana.position.z = 0;
+            banana.scale.x = 500;
+            banana.scale.y = 500;
+            banana.scale.z = 500;
+            //Go through all children of the loaded object and search for a Mesh
+            object.traverse( function ( child ) {
+                //This allow us to check if the children is an instance of the Mesh constructor
+                if(child instanceof THREE.Mesh){
+                    child.material.color = new THREE.Color(0X00FF00);
+                    //Sometimes there are some vertex normals missing in the .obj files, ThreeJs will compute them
+                    child.geometry.computeVertexNormals();
+                }
+            });
+            //Add the 3D object in the scene
+            scene.add(banana);
+            render();
+        };
+
+
+        var render = function () {
+            requestAnimationFrame(render);
+
+            //Turn the banana
+            banana.rotation.y += .01;
+
+            renderer.render(scene, camera);
+        };
+
+        init();
+    </script>
     <script>
         $("#uploadvideo").on("click", function() {
             $('#hiddeninputvideo').click(); 

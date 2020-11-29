@@ -79,9 +79,11 @@ def get_image():
                 # Running inference from demo.py
                 cfg_from_list(['CONST.BATCH_SIZE', 1])
                 infer(num_imgs, unique_folder)
+
+                obj_path = os.path.join(unique_folder, 'prediction.obj')
                 print("Inference done!")
 
-                return render_template('index.html', original_video_path=original_video_path)
+                return render_template('index.html', original_video_path=original_video_path, obj_path=obj_path)
         except:
             flash("Our server hiccuped :/ Please upload another file! :)")
             print(traceback.format_exc())

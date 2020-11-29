@@ -66,9 +66,12 @@ def get_image():
                 # Make separate folder using the unique id
                 unique_folder = os.path.join(app.config['PROCESSED_IMAGES'], uid)
                 os.system("mkdir -p " + unique_folder)
-                os.system("ffmpeg -i {} -r {} -start_number 0 {}/%01d.png".format(original_video_path, 0.5, unique_folder))
+
+                num_of_frames = 4
+                os.system("ffmpeg -i {} -r {} -start_number 0 {}/%01d.png".format(original_video_path, num_of_frames/video_duration, unique_folder))
                 print("Done extracting frames")
 
+                os.remove(os.path.join(unique_folder, "0.png"))
                 imagelist = [file for file in os.listdir(unique_folder) if file.endswith('.png')]
                 num_imgs = len(imagelist)
 

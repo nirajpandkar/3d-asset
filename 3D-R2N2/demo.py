@@ -36,7 +36,7 @@ def download_model(fn):
 
 def load_demo_images(num_imgs, dir_path):
     ims = []
-    for i in range(num_imgs):
+    for i in range(1, num_imgs):
         im = Image.open(os.path.join(dir_path, '{}.png'.format(i)))
         ims.append([np.array(im).transpose(
             (2, 0, 1)).astype(np.float32) / 255.])
